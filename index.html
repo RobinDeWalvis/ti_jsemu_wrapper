@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>ti_jsemu_wrapper by TI-Planet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">ti_jsemu_wrapper</h1>
+      <h2 class="project-tagline">A wrapper for TI&#39;s JavaScript-based z80/eZ80 emulators (TI-82A/83+/84+, 84+CSE, 84+CE/83PCE). Version 2</h2>
+      <a href="https://github.com/TI-Planet/ti_jsemu_wrapper" class="btn">View on GitHub</a>
+      <a href="https://github.com/TI-Planet/ti_jsemu_wrapper/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/TI-Planet/ti_jsemu_wrapper/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="ti_jsemu_wrapper-v2" class="anchor" href="#ti_jsemu_wrapper-v2" aria-hidden="true"><span class="octicon octicon-link"></span></a>ti_jsemu_wrapper (v2)</h1>
+
+<p>A wrapper for TI's JavaScript-based z80/eZ80 emulators present in their TI-SmartView CE software.  </p>
+
+<hr>
+
+<h3>
+<a id="this-repository-contains-absolutely-no-code-or-resources-from-ti" class="anchor" href="#this-repository-contains-absolutely-no-code-or-resources-from-ti" aria-hidden="true"><span class="octicon octicon-link"></span></a>This repository contains absolutely no code or resources from TI.</h3>
+
+<p>For this project to work, you have to use the appropriate emulator file from TI SmartView - This project is completely pointless if you don't have it installed already!<br>
+<em>I shall remind everyone that you are solely responsible for the usage of this project, and you're obviously still subject to the SmartView license.</em></p>
+
+<hr>
+
+<h2>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description:</h2>
+
+<p>The point of this is to be able to enjoy a good emulation speed from TI's emu by running it from within a web browser rather than from within SmartView, since Java has a suboptimal JS interpreter in its webview...<br>
+This is especially useful while there is no community-made 84+CE/83PCE emulators, for developers wanting to easily record the screen, for instance, either with the integrated feature, or by recording their computer running the emu at a decent speed.</p>
+
+<p>List of supported emulators:</p>
+
+<ul>
+<li>TI-82 Advanced / TI-83 Plus.fr / TI-84 Plus (SE)</li>
+<li>TI-84 Plus C Silver Edition</li>
+<li>TI-84 Plus CE / TI-83 Premium CE</li>
+</ul>
+
+<p>In theory, any "TI ExamCalc" (that's the official name) JavaScript emulator may work - but only those from the list above have been tested.</p>
+
+<h4>
+<a id="how-to-use-it" class="anchor" href="#how-to-use-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use it:</h4>
+
+<ul>
+<li>
+<a href="https://github.com/TI-Planet/ti_jsemu_wrapper/archive/master.zip">Download</a> this project</li>
+<li>Open the <code>index.html</code> file from the zip you've just downloaded, with a recent decent browser</li>
+<li>Select or drag&amp;drop the TI SmartView CE emulator file (<em>the .jar</em>) you want to use (<em>located in the SmartView app folder and within the <code>Java</code> (or <code>app</code>) &gt; <code>emulators</code> directory</em>)</li>
+<li>That's all :) You don't need to do any extracting/moving/copying!</li>
+</ul>
+
+<h4>
+<a id="whats-in-it-right-now" class="anchor" href="#whats-in-it-right-now" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's in it right now:</h4>
+
+<ul>
+<li>Keypress history</li>
+<li>Big hand pointer ("handy" for presentation purposes)</li>
+<li>Screen zooming</li>
+<li>Screenshot (.png export, auto-download)</li>
+<li>Video capture (webm creation, thanks to WebRTC, currently only working on Chrome)</li>
+</ul>
+
+<h4>
+<a id="whats-not-in-it-right-now" class="anchor" href="#whats-not-in-it-right-now" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's <em>not</em> in it right now:</h4>
+
+<p><em>(and I don't really plan to work on that)</em></p>
+
+<ul>
+<li>File transfers</li>
+<li>Debugging support</li>
+<li>Skin switching</li>
+<li>State saving/loading</li>
+<li>...</li>
+</ul>
+
+<h4>
+<a id="screenshot" class="anchor" href="#screenshot" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screenshot:</h4>
+
+<p>If you use the wrapper with the <em>TI-84 Plus CE</em> emulator, you will see something like:<br>
+<a href="https://i.imgur.com/iR7tgSB.png"><img src="https://i.imgur.com/DQdDg14.png" alt="With the TI-84 Plus CE emulator"></a></p>
+
+<h4>
+<a id="changes-over-v1" class="anchor" href="#changes-over-v1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changes over v1:</h4>
+
+<ul>
+<li>You do <em>not</em> have to extract TI's jar file anymore and move/copy files around, just drag&amp;drop the one .jar file and that's all!</li>
+<li>Minor improvements to the CSS</li>
+<li>Bugfixes related to event handling in general</li>
+<li>Better compatiblity with Firefox and Safari</li>
+<li>Some code cleanup</li>
+</ul>
+
+<hr>
+
+<p>This project is under the <em>LGPL3</em> license. See <a href="LICENSE">LICENSE</a> file for the details.</p>
+
+<hr>
+
+<p>The video recording feature is made possible (on Chrome, at least) with <a href="https://www.webrtc-experiment.com">WebRTC</a>.<br>
+License (MIT):<br>
+<code>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</code></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/TI-Planet/ti_jsemu_wrapper">ti_jsemu_wrapper</a> is maintained by <a href="https://github.com/TI-Planet">TI-Planet</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
