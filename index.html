@@ -22,7 +22,14 @@
       <h1>
 <a id="ti_jsemu_wrapper-v2" class="anchor" href="#ti_jsemu_wrapper-v2" aria-hidden="true"><span class="octicon octicon-link"></span></a>ti_jsemu_wrapper (v2)</h1>
 
-<p>A wrapper for TI's JavaScript-based z80/eZ80 emulators present in their TI-SmartView CE software.  </p>
+<p>A web-based wrapper for TI's JavaScript z80/eZ80 emulators present in their TI-SmartView CE software, which are:</p>
+
+<ul>
+<li>TI-82 Advanced / TI-83 Plus.fr / TI-84 Plus (SE)</li>
+<li>TI-84 Plus C Silver Edition</li>
+<li>TI-84 Plus CE / TI-83 Premium CE.<br>
+</li>
+</ul>
 
 <hr>
 
@@ -35,24 +42,31 @@
 <hr>
 
 <h2>
-<a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description:</h2>
+<a id="features-and-limitations" class="anchor" href="#features-and-limitations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features and limitations</h2>
 
-<p>The point of this is to be able to enjoy a good emulation speed from TI's emu by running it from within a web browser rather than from within SmartView, since Java has a suboptimal JS interpreter in its webview...<br>
+<table>
+<thead>
+<tr>
+<th>What it DOES have/do</th>
+<th>What it DOES NOT have/do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✓ Keypress history <br> ✓ Big hand pointer <br> ✓ Screen zooming <br> ✓ Screenshot (PNG) <br> ✓ Video capture (WebM)</td>
+<td>✗ File transfers <br> ✗ Debugging support <br> ✗ Skin switching <br> ✗ State saving/loading <br> ✗ ...</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="why" class="anchor" href="#why" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why?</h2>
+
+<p>The point of this is to be able to enjoy a good emulation speed from TI's emu by running it within a web browser rather than within the SmartView, since Java has a suboptimal JS interpreter in its webview.<br>
 This is especially useful while there is no community-made 84+CE/83PCE emulators, for developers wanting to easily record the screen, for instance, either with the integrated feature, or by recording their computer running the emu at a decent speed.</p>
 
-<p>List of supported emulators:</p>
-
-<ul>
-<li>TI-82 Advanced / TI-83 Plus.fr / TI-84 Plus (SE)</li>
-<li>TI-84 Plus C Silver Edition</li>
-<li>TI-84 Plus CE / TI-83 Premium CE</li>
-</ul>
-
-<p>In theory, any "TI ExamCalc" (that's the official name) JavaScript emulator may work - but only those from the list above have been tested.<br>
-Note that because the wrapper works by assuming specific files are there, it may suddenly not work anymore on new versions of the SmartView if they have emulator jar files organized differently.</p>
-
-<h4>
-<a id="how-to-use-it" class="anchor" href="#how-to-use-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use it:</h4>
+<h2>
+<a id="how-to-use-it" class="anchor" href="#how-to-use-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use it:</h2>
 
 <p>You can actually simply use the <a href="https://ti-planet.github.io/ti_jsemu_wrapper/demo/">online demo</a>, or follow these simple steps if you want it locally:</p>
 
@@ -63,40 +77,36 @@ Note that because the wrapper works by assuming specific files are there, it may
 <li>Select or drag&amp;drop the TI SmartView CE emulator file (<em>the .jar</em>) you want to use (<em>located in the SmartView app folder and within <code>Java</code> (or <code>app</code>) &gt; <code>emulators</code></em>)</li>
 </ul>
 
-<p>That's all :) No extracting/digging/moving/copying needed!</p>
+<p>That's all :) No extracting/digging/moving/copying needed!<br>
+<em>Note that because the wrapper works by assuming specific files are there, it may suddenly not work anymore on newer versions of the SmartView if they have emulator jar files organized differently.</em></p>
+
+<h2>
+<a id="faq" class="anchor" href="#faq" aria-hidden="true"><span class="octicon octicon-link"></span></a>FAQ</h2>
 
 <h4>
-<a id="whats-in-it-right-now" class="anchor" href="#whats-in-it-right-now" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's in it right now:</h4>
+<a id="i-have-weird-display-glitches-on-chrome-when-i-do-a-screenshot---whats-hapenning" class="anchor" href="#i-have-weird-display-glitches-on-chrome-when-i-do-a-screenshot---whats-hapenning" aria-hidden="true"><span class="octicon octicon-link"></span></a>I have weird display glitches on Chrome when I do a screenshot - what's hapenning?</h4>
 
-<ul>
-<li>Keypress history</li>
-<li>Big hand pointer ("handy" for presentation purposes)</li>
-<li>Screen zooming</li>
-<li>Screenshot (.png export, auto-download)</li>
-<li>Video capture (webm creation, thanks to WebRTC, currently only working on Chrome)</li>
-</ul>
+<p>That's a known issue, and it's apparently a bug in the way Chrome refreshes the canvas with 2D Hardware acceleration. You can disable that in <code>chrome://flags/#disable-accelerated-2d-canvas</code> (yes that's a URL).<br>
+Or just make the calculator OS force-refresh the whole screen.</p>
 
 <h4>
-<a id="whats-not-in-it-right-now" class="anchor" href="#whats-not-in-it-right-now" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's <em>not</em> in it right now:</h4>
+<a id="it-wont-load-in-internet-explorer" class="anchor" href="#it-wont-load-in-internet-explorer" aria-hidden="true"><span class="octicon octicon-link"></span></a>It won't load in Internet Explorer...?</h4>
 
-<p><em>(and I don't really plan to work on that)</em></p>
-
-<ul>
-<li>File transfers</li>
-<li>Debugging support</li>
-<li>Skin switching</li>
-<li>State saving/loading</li>
-<li>...</li>
-</ul>
+<p>Hey, I did say "recent decent browser" :P. Anyway, it seems to actually work if you just change its user agent from the console, to Chrome for example.</p>
 
 <h4>
-<a id="screenshot" class="anchor" href="#screenshot" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screenshot:</h4>
+<a id="i-want-to-resize-the-zoomed-screen-how-do-i-do-that" class="anchor" href="#i-want-to-resize-the-zoomed-screen-how-do-i-do-that" aria-hidden="true"><span class="octicon octicon-link"></span></a>I want to resize the zoomed screen, how do I do that?</h4>
+
+<p>Well, right now you'll have to live-edit the HTML/CSS (right-click &gt; inspect), but I have something better on my TODO list. The current default zoom is at 1.5x, by the way.</p>
+
+<h2>
+<a id="screenshot" class="anchor" href="#screenshot" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screenshot:</h2>
 
 <p>If you use the wrapper with the <em>TI-84 Plus CE</em> emulator, you will see something like:<br>
 <a href="https://i.imgur.com/iR7tgSB.png"><img src="https://i.imgur.com/DQdDg14.png" alt="With the TI-84 Plus CE emulator"></a></p>
 
-<h4>
-<a id="changes-over-v1" class="anchor" href="#changes-over-v1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changes over v1:</h4>
+<h2>
+<a id="changes-over-v1" class="anchor" href="#changes-over-v1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changes over v1:</h2>
 
 <ul>
 <li>You do <em>not</em> have to extract TI's jar file anymore and move/copy files around, just drag&amp;drop the one .jar file and that's all!</li>
@@ -106,7 +116,8 @@ Note that because the wrapper works by assuming specific files are there, it may
 <li>Some code cleanup</li>
 </ul>
 
-<hr>
+<h2>
+<a id="misc" class="anchor" href="#misc" aria-hidden="true"><span class="octicon octicon-link"></span></a>Misc.</h2>
 
 <p>This project is under the <em>LGPL3</em> license. See <a href="LICENSE">LICENSE</a> file for the details.</p>
 
