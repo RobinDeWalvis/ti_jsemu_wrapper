@@ -181,3 +181,73 @@ function resizeHelper() {
     calculatorDiv.style.MozTransform = "scale(" + val + ")";
     calcDivZoom = val;
 }
+
+function runAsm(orig, code, onDone)
+{
+	state = [];
+	state.registers = theCalc.M.Xd();
+	state.instr_dd00 = theCalc.M.Fg[0];
+	state.data = [];
+	
+	for (var i=0; i<code.length; i++)
+	{
+		state.data[i] = theCalc.k.memory.v[orig+i];
+		theCalc.k.memory.v[orig+i] = code[i];
+	}
+	
+	theCalc.M.Fg[0] = function()
+	{
+		for (var i=0; i<state.data.length; i++)
+			theCalc.k.memory.v[orig+i] = state.data[i];
+		
+		theCalc.M.Fg[0] = state.instr_dd00;
+		theCalc.M.reset(state.registers);
+		if (onDone)
+			onDone();
+	};
+	theCalc.M.a = orig;
+}
+
+function loadProgram(file)
+{
+	if (file.slice(0, 8) != "**TI83F*")
+		return alert("Error: Invalid file!");
+	var size = file.charCodeAt(54) << 8 | file.charCodeAt(53);
+	var data = file.slice(55, 55+size);
+	if (!(data.charCodeAt(0) == 11 || data.charCodeAt(0) == 13) || data.charCodeAt(1) != 0)
+		return alert("Error: Corrupted data!");
+	
+	var length = data.charCodeAt(3) << 8 | data.charCodeAt(2);
+	var type = data.charCodeAt(4);
+	var name = data.slice(5,13);
+	var flag = data.charCodeAt(14);
+	
+	if (data.charCodeAt(0) == 13 && flag != 0)
+		return alert("Error: Archived variables are not supported.");
+	
+	var OP1 = 0xD005F8;
+	theCalc.k.memory.v[OP1] = type;
+	for (var i=0; i<name.length; i++)
+		theCalc.k.memory.v[OP1+i+1] = name.charCodeAt(i);
+	
+	code = [
+		0xF3, // di
+		0xCD, 0x0C, 0x05, 0x02, // call $2050C (_ChkFindSym)
+		0x38, 0x04, // jr c, noDel
+		0xCD, 0x88, 0x05, 0x02, // call $20588 (_DelVar)
+		0x3E, type, // noDel: ld a, type
+		0x21, length & 0xFF, length >> 8 & 0xFF, length >> 16 & 0xFF, // ld hl, length
+		0xCD, 0x38, 0x13, 0x02, // call 0x021338 (_CreateVar)
+		0xED, 0x53, 0x00, 0x00, 0xD4, // ld (0xD40000), de
+		0xFB, // ei
+		0xDD, 0x00
+	]
+	
+	runAsm(0xD40003, code, function()
+	{
+		var varLoc = theCalc.k.memory.v[0xD40000] | (theCalc.k.memory.v[0xD40001] << 8) | (theCalc.k.memory.v[0xD40002] << 16);
+		console.log(varLoc);
+		for (var i=0; i<length; i++)
+			theCalc.k.memory.v[varLoc+i] = data.charCodeAt(17+i) & 0xFF;
+	});
+}

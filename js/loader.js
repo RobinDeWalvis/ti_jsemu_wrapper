@@ -60,3 +60,21 @@ fileInput.addEventListener('change', function() {
         });
     }, alert );
 }, false);
+
+var programInput = $id("program-input");
+programInput.addEventListener('change', function()
+{
+	if (!(window.File && window.FileReader && window.FileList && window.Blob))
+		return alert('The File APIs are not fully supported by your browser.');
+	var file = this.files[0];
+	
+	if (!file)
+		return;
+	var r = new FileReader();
+	r.onload = function(e)
+	{
+		loadProgram(e.target.result);
+	}
+	r.readAsText(file);
+	$id("program-input").value = '';
+}, false);
