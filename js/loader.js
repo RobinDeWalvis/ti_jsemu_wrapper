@@ -73,8 +73,8 @@ programInput.addEventListener('change', function()
 	var r = new FileReader();
 	r.onload = function(e)
 	{
-		loadProgram(e.target.result);
+		loadProgram(String.fromCharCode.apply(null, new Uint8Array(e.target.result)));
 	}
-	r.readAsText(file);
+	r.readAsArrayBuffer(file);
 	$id("program-input").value = '';
 }, false);

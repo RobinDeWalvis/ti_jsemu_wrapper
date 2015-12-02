@@ -182,7 +182,7 @@ function resizeHelper() {
     calcDivZoom = val;
 }
 
-function runAsm(orig, code, onDone)
+function runAsm(orig, code, callback)
 {
 	state = [];
 	state.registers = theCalc.M.Xd();
@@ -197,19 +197,20 @@ function runAsm(orig, code, onDone)
 	
 	theCalc.M.Fg[0] = function()
 	{
+		if (callback)
+			callback();
+		
 		for (var i=0; i<state.data.length; i++)
 			theCalc.k.memory.v[orig+i] = state.data[i];
 		
 		theCalc.M.Fg[0] = state.instr_dd00;
 		theCalc.M.reset(state.registers);
-		if (onDone)
-			onDone();
 	};
 	theCalc.M.a = orig;
 }
 
 function loadProgram(file)
-{
+{	
 	if (file.slice(0, 8) != "**TI83F*")
 		return alert("Error: Invalid file!");
 	var size = file.charCodeAt(54) << 8 | file.charCodeAt(53);
@@ -220,10 +221,6 @@ function loadProgram(file)
 	var length = data.charCodeAt(3) << 8 | data.charCodeAt(2);
 	var type = data.charCodeAt(4);
 	var name = data.slice(5,13);
-	var flag = data.charCodeAt(14);
-	
-	if (data.charCodeAt(0) == 13 && flag != 0)
-		return alert("Error: Archived variables are not supported.");
 	
 	var OP1 = 0xD005F8;
 	theCalc.k.memory.v[OP1] = type;
@@ -231,6 +228,7 @@ function loadProgram(file)
 		theCalc.k.memory.v[OP1+i+1] = name.charCodeAt(i);
 	
 	code = [
+		0x00, 0x00, 0x00,
 		0xF3, // di
 		0xCD, 0x0C, 0x05, 0x02, // call $2050C (_ChkFindSym)
 		0x38, 0x04, // jr c, noDel
@@ -243,11 +241,10 @@ function loadProgram(file)
 		0xDD, 0x00
 	]
 	
-	runAsm(0xD40003, code, function()
+	runAsm(0xD40000, code, function()
 	{
 		var varLoc = theCalc.k.memory.v[0xD40000] | (theCalc.k.memory.v[0xD40001] << 8) | (theCalc.k.memory.v[0xD40002] << 16);
-		console.log(varLoc);
 		for (var i=0; i<length; i++)
-			theCalc.k.memory.v[varLoc+i] = data.charCodeAt(17+i) & 0xFF;
+			theCalc.k.memory.v[varLoc+i] = data.charCodeAt(17+i);
 	});
 }
